@@ -15,12 +15,12 @@
     </noscript>
     <div class="a">
     <h1>Google Translate Ransomiser</h1>
-    <h2>Ce système permet de traduire un mot ou texte en toutes les langues puis de revenir à la langue initiale.</h2>
+    <h2>Ce système permet de traduire un mot ou texte en toutes les langues puis de revenir à la langue initiale. Seuls les langages sous la forme <a href="https://fr.wikipedia.org/wiki/Liste_des_codes_ISO_639-1">ISO 639-1</a> ou écrits en anglais sont acceptés.</h2>
 </div>
     <ul id="body"></ul>
     <form id="form" action="">
         <input type="text" id="text" placeholder="Texte à traduire" autocomplete="off" required>
-        <input type="text" id="langage" placeholder="Langage d'origine" autocomplete="on" required>
+        <input type="text" id="langage" placeholder="Langage d'origine" autocomplete="off" required>
     <button style="cursor: pointer;" title="Exécuter">Exécuter</button>
 </form>
 </body>
@@ -37,10 +37,11 @@
 div.childNodes.forEach(child=>{
     div.removeChild(child)
 })
+    let names = ["abkhazian","afar","afrikaans","akan","albanian","amharic","arabic","aragonese","armenian","assamese","avaric","avestan","aymara","azerbaijani","bambara","bashkir","basque","belarusian","bengali","bihari languages","bislama","bosnian","breton","bulgarian","burmese","catalan","central khmer","chamorro","chechen","chichewa","chinese","church slavonic","chuvash","cornish","corsican","cree","croatian","czech","danish","divehi","dutch","dzongkha","english","esperanto","estonian","ewe","faroese","fijian","finnish","french","fulah","gaelic","galician","ganda","georgian","german","gikuyu","greek (modern)","greenlandic","guarani","gujarati","haitian","hausa","hebrew","herero","hindi","hiri motu","hungarian","icelandic","ido","igbo","indonesian","interlingua","interlingue","inuktitut","inupiaq","irish","italian","japanese","javanese","kannada","kanuri","kashmiri","kazakh","kinyarwanda","komi","kongo","korean","kwanyama","kurdish","kyrgyz","lao","latin","latvian","letzeburgesch","limburgish","lingala","lithuanian","luba-katanga","macedonian","malagasy","malay","malayalam","maltese","manx","maori","marathi","marshallese","moldovan","mongolian","nauru","navajo","northern ndebele","ndonga","nepali","northern sami","norwegian","norwegian bokmål","norwegian nynorsk","nuosu","occitan (post 1500)","ojibwa","oriya","oromo","ossetian","pali","panjabi","pashto","persian","polish","portuguese","quechua","romansh","rundi","russian","samoan","sango","sanskrit","sardinian","serbian","shona","sindhi","sinhala","slovak","slovenian","somali","sotho","south ndebele","spanish","sundanese","swahili","swati","swedish","tagalog","tahitian","tajik","tamil","tatar","telugu","thai","tibetan","tigrinya","tonga","tsonga","tswana","turkish","turkmen","twi","uighur","ukrainian","urdu","uzbek","venda","vietnamese","volap_k","walloon","welsh","western frisian","wolof","xhosa","yiddish","yoruba","zhuang","zulu"]
     let codes = ["af","ak","sq","am","ar","hy","as","ae","ay","az","bm","ba","eu","be","bn","bh","bi","bs","br","bg","my","ca","km","ch","ce","ny","zh","cu","cv","kw","co","cr","hr","cs","da","dv","nl","dz","en","eo","et","ee","fo","fj","fi","fr","ff","gd","gl","lg","ka","de","ki","el","kl","gn","gu","ht","ha","he","hz","hi","ho","hu","is","io","ig","id","ia","ie","iu","ik","ga","it","ja","jv","kn","kr","ks","kk","rw","kv","kg","ko","kj","ku","ky","lo","la","lv","lb","li","ln","lt","lu","mk","mg","ms","ml","mt","gv","mi","mr","mh","ro","mn","na","nv","nd","ng","ne","se","no","nb","nn","ii","oc","oj","or","om","os","pi","pa","ps","fa","pl","pt","qu","rm","rn","ru","sm","sg","sa","sc","sr","sn","sd","si","sk","sl","so","st","nr","es","su","sw","ss","sv","tl","ty","tg","ta","tt","te","th","bo","ti","to","ts","tn","tr","tk","tw","ug","uk","ur","uz","ve","vi","vo","wa","cy","fy","wo","xh","yi","yo","za","zu"]
-if(!codes.includes(langage)){
+if(!codes.includes(langage) && !names.includes(langage)){
     let err = document.createElement('h3')
-err.textContent = "Le langage choisi n'est pas compatible (Seul les langages sous forme ISO-639-1 sont acceptés)"
+err.textContent = "Le langage choisi n'est pas compatible"
 err.style = "color: #ff0000"
 return div.appendChild(err)
 }
@@ -71,7 +72,7 @@ n++
 while(1<2){
 setTimeout(()=>{
     b()
-},9000)
+},10000)
 break;
 }
 setTimeout(()=>{
@@ -105,6 +106,6 @@ div.childNodes.forEach(child=>{
 })
 div.appendChild(callback)
 div.appendChild(copy)
-},10000)
+},12000)
     })
     </script>
