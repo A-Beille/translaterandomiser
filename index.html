@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width-device-width,initial-scale=1.0">
+    <title>Google Translate Randomiser</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico">
+    <script src="https://cdn.jsdelivr.net/npm/translate@1/translate.min.js"></script>
+</head>
+<body>
+    <noscript>
+        <div class="unable">
+            <h3>Cette page ne peut pas fonctionner sans JavaScript. Or, ce dernier est désactivé. Veuillez le réactiver pour permettre au site de fonctionner.</h3>
+        </div>
+    </noscript>
+    <div class="a">
+    <h1>Google Translate Ransomiser</h1>
+    <h2>Ce système permet de traduire un mot en toutes les langues puis de revenir à la langue initiale.</h2>
+</div>
+    <ul id="body"></ul>
+    <form id="form" action="">
+        <input type="text" id="text" placeholder="Texte à traduire" autocomplete="off" required>
+        <input type="text" id="langage" placeholder="Langage d'origine" autocomplete="on" required>
+    <button style="cursor: pointer;" title="Exécuter">Exécuter</button>
+</form>
+</body>
+<script>
+   let form = document.getElementById("form")
+    form.addEventListener("submit",function translate2(wordt){
+        wordt.preventDefault()
+        let div = document.getElementById("body")
+        const word = document.getElementById("text").value.trim()
+    const langage = document.getElementById("langage").value.trim()
+    div.childNodes.forEach(child=>{
+    div.removeChild(child)
+})
+div.childNodes.forEach(child=>{
+    div.removeChild(child)
+})
+    let codes = ["af","ak","sq","am","ar","hy","as","ae","ay","az","bm","ba","eu","be","bn","bh","bi","bs","br","bg","my","ca","km","ch","ce","ny","zh","cu","cv","kw","co","cr","hr","cs","da","dv","nl","dz","en","eo","et","ee","fo","fj","fi","fr","ff","gd","gl","lg","ka","de","ki","el","kl","gn","gu","ht","ha","he","hz","hi","ho","hu","is","io","ig","id","ia","ie","iu","ik","ga","it","ja","jv","kn","kr","ks","kk","rw","kv","kg","ko","kj","ku","ky","lo","la","lv","lb","li","ln","lt","lu","mk","mg","ms","ml","mt","gv","mi","mr","mh","ro","mn","na","nv","nd","ng","ne","se","no","nb","nn","ii","oc","oj","or","om","os","pi","pa","ps","fa","pl","pt","qu","rm","rn","ru","sm","sg","sa","sc","sr","sn","sd","si","sk","sl","so","st","nr","es","su","sw","ss","sv","tl","ty","tg","ta","tt","te","th","bo","ti","to","ts","tn","tr","tk","tw","ug","uk","ur","uz","ve","vi","vo","wa","cy","fy","wo","xh","yi","yo","za","zu"]
+if(!codes.includes(langage)){
+    let err = document.createElement('h3')
+err.textContent = "Le langage choisi n'est pas compatible (Seul les langages sous forme ISO-639-1 sont acceptés)"
+err.style = "color: #ff0000"
+return div.appendChild(err)
+}
+let loading = document.createElement('h3')
+loading.textContent = "Chargement..."
+loading.style = "color: #5865F2"
+div.appendChild(loading)
+    let w = word
+let n = 0
+translate.from = 'fr'
+function a(){
+    translate.from = codes[n-1]
+    translate(w,codes[n]).then((wo)=>{
+            w = wo
+        }).catch((err)=>{
+        })
+}
+function b(){
+    translate.from = codes[n-2]
+    translate(w,langage).then((word)=>{
+        w = word
+    })
+}
+while(n<=codes.length){
+a()
+n++
+}
+while(1<2){
+setTimeout(()=>{
+    b()
+},9000)
+break;
+}
+setTimeout(()=>{
+let nb = w
+let copy = document.createElement('button')
+copy.id = "copybutton"
+copy.textContent = `Copier`
+copy.title = "Copier le résultat"
+function outFunc() {
+  var copy = document.getElementById("copybutton");
+  copy.textContent = "Copier";
+  copy.title = "Copier le résultat";
+}
+function onClick(){
+    var copyText = document.getElementById("callback");
+    navigator.clipboard.writeText(copyText.textContent);
+    var copy = document.getElementById("copybutton");
+  copy.textContent = "Copié !";
+  copy.title = "Résultat copié !";
+}
+copy.addEventListener("click",onClick, false)
+copy.addEventListener("mouseleave",outFunc, false)
+let callback = document.createElement('h3')
+callback.id = "callback"
+callback.textContent = nb
+div.childNodes.forEach(child=>{
+    div.removeChild(child)
+})
+div.childNodes.forEach(child=>{
+    div.removeChild(child)
+})
+div.appendChild(callback)
+div.appendChild(copy)
+},10000)
+    })
+    </script>
