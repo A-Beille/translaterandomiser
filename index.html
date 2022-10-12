@@ -38,7 +38,7 @@ div.childNodes.forEach(child=>{
     div.removeChild(child)
 })
     let names = ["abkhazian","afar","afrikaans","akan","albanian","amharic","arabic","aragonese","armenian","assamese","avaric","avestan","aymara","azerbaijani","bambara","bashkir","basque","belarusian","bengali","bihari languages","bislama","bosnian","breton","bulgarian","burmese","catalan","central khmer","chamorro","chechen","chichewa","chinese","church slavonic","chuvash","cornish","corsican","cree","croatian","czech","danish","divehi","dutch","dzongkha","english","esperanto","estonian","ewe","faroese","fijian","finnish","french","fulah","gaelic","galician","ganda","georgian","german","gikuyu","greek (modern)","greenlandic","guarani","gujarati","haitian","hausa","hebrew","herero","hindi","hiri motu","hungarian","icelandic","ido","igbo","indonesian","interlingua","interlingue","inuktitut","inupiaq","irish","italian","japanese","javanese","kannada","kanuri","kashmiri","kazakh","kinyarwanda","komi","kongo","korean","kwanyama","kurdish","kyrgyz","lao","latin","latvian","letzeburgesch","limburgish","lingala","lithuanian","luba-katanga","macedonian","malagasy","malay","malayalam","maltese","manx","maori","marathi","marshallese","moldovan","mongolian","nauru","navajo","northern ndebele","ndonga","nepali","northern sami","norwegian","norwegian bokmål","norwegian nynorsk","nuosu","occitan (post 1500)","ojibwa","oriya","oromo","ossetian","pali","panjabi","pashto","persian","polish","portuguese","quechua","romansh","rundi","russian","samoan","sango","sanskrit","sardinian","serbian","shona","sindhi","sinhala","slovak","slovenian","somali","sotho","south ndebele","spanish","sundanese","swahili","swati","swedish","tagalog","tahitian","tajik","tamil","tatar","telugu","thai","tibetan","tigrinya","tonga","tsonga","tswana","turkish","turkmen","twi","uighur","ukrainian","urdu","uzbek","venda","vietnamese","volap_k","walloon","welsh","western frisian","wolof","xhosa","yiddish","yoruba","zhuang","zulu"]
-    let codes = ["af","ak","sq","am","ar","hy","as","ae","ay","az","bm","ba","eu","be","bn","bh","bi","bs","br","bg","my","ca","km","ch","ce","ny","zh","cu","cv","kw","co","cr","hr","cs","da","dv","nl","dz","en","eo","et","ee","fo","fj","fi","fr","ff","gd","gl","lg","ka","de","ki","el","kl","gn","gu","ht","ha","he","hz","hi","ho","hu","is","io","ig","id","ia","ie","iu","ik","ga","it","ja","jv","kn","kr","ks","kk","rw","kv","kg","ko","kj","ku","ky","lo","la","lv","lb","li","ln","lt","lu","mk","mg","ms","ml","mt","gv","mi","mr","mh","ro","mn","na","nv","nd","ng","ne","se","no","nb","nn","ii","oc","oj","or","om","os","pi","pa","ps","fa","pl","pt","qu","rm","rn","ru","sm","sg","sa","sc","sr","sn","sd","si","sk","sl","so","st","nr","es","su","sw","ss","sv","tl","ty","tg","ta","tt","te","th","bo","ti","to","ts","tn","tr","tk","tw","ug","uk","ur","uz","ve","vi","vo","wa","cy","fy","wo","xh","yi","yo","za","zu"]
+    let codes = ["aa","ab","ae","af","ak","am","an","ar","as","av","ay","az","ba","be","bg","bh","bi","bm","bn","bo","br","bs","ca","ce","ch","co","cr","cs","cu","cv","cy","da","de","dv","dz","ee","el","en","eo","es","et","eu","fa","ff","fi","fj","fo","fr","fy","ga","gd","gl","gn","gu","gv","ha","he","hi","ho","hr","ht","hu","hy","hz","ia","id","ie","ig","ii","ik","io","is","it","iu","ja","jv","ka","kg","ki","kj","kk","kl","km","kn","ko","kr","ks","ku","kv","kw","ky","la","lb","lg","li","ln","lo","lt","lu","lv","mg","mh","mi","mk","ml","mn","mr","ms","mt","my","na","nb","nd","ne","ng","nl","nn","no","nr","nv","ny","oc","oj","om","or","os","pa","pi","pl","ps","pt","qu","rm","rn","ro","ru","rw","sa","sc","sd","se","sg","si","sk","sl","sm","sn","so","sq","sr","ss","st","su","sv","sw","ta","te","tg","th","ti","tk","tl","tn","to","tr","ts","tt","tw","ty","ug","uk","ur","uz","ve","vi","vo","wa","wo","xh","yi","yo","za","zh","zu"]
 if(!codes.includes(langage) && !names.includes(langage)){
     let err = document.createElement('h3')
 err.textContent = "Le langage choisi n'est pas compatible"
@@ -57,13 +57,16 @@ function a(){
     translate(w,codes[n]).then((wo)=>{
             w = wo
         }).catch((err)=>{
+            return;
         })
 }
 function b(){
     translate.from = codes[n-2]
     translate(w,langage).then((word)=>{
         w = word
-    })
+    }).catch((err)=>{
+            return;
+        })
 }
 while(n<=codes.length){
 a()
